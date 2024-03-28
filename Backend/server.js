@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const userRoute = require("./routes/userRoutes");
+
+app.use(express.json()); //we can use body parser also
+
 main()
 .then(() => {
     console.log("connection successfull");
@@ -19,7 +23,4 @@ async function main() {
   await mongoose.connect(process.env.URL);
 }
 
-app.get("/", (req,res) => {
-    res.send("app is running");
-})
-
+app.use("/api/user",userRoute);
